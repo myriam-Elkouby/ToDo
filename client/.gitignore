@@ -1,0 +1,95 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# npm
+*.log
+package-lock.json
+
+# Yarn
+yarn-error.log
+yarn.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# Build files
+build/
+dist/
+out/
+
+# Log files
+*.log
+logs/
+*.log.*
+
+# User-specific files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+*.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Runtime data
+pnp.js
+pnp.js.map
+
+# Cache directories
+.pnp/
+pnpify/
+
+# VS Code directories
+.vscode/
+.history/
+
+# Windows thumbnail cache directories
+Thumbs.db
+ehthumbs.db
+
+# macOS files
+.DS_Store
+
+# .eslintcache
+.eslintcache
+
+# Log files
+*.log
+
+# Editor directories and files
+.idea/
+.vscode/
+
+# Mac specific files
+.DS_Store
+
+# Linux specific files
+Thumbs.db
+.DS_Store
+
+# Test coverage
+coverage/
+
+# .env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# .env*.local is ignored by default
+.env*.local
+.env.local
+
+# .eslintcache
+.eslintcache
