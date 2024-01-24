@@ -86,8 +86,8 @@ app.MapDelete("/items/{id:int}", async(int id,ToDoDbContext context) => {
 
 app.MapGet("/",()=>"server Api is running");
 
-app.Run();
-//app.Run("https://localhost:5170");
+app.Run("https://localhost:5170");
+//app.Run();
 
 
 
