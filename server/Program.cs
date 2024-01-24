@@ -2,18 +2,27 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TodoApi;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+
+IConfiguration configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+string connectionString = configuration.GetConnectionString("ToDoDB");
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//how to do a dependency injection?
-builder.Services.AddDbContext<ToDoDbContext>();
+//dependency injection
+builder.Services.AddDbContext<ToDoDbContext>(options => options.UseMySql(connectionString));
 
 builder.Services.AddSwaggerGen();
 
@@ -23,9 +32,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowReactOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost:3000")
-                          .AllowAnyMethod()
-                            .AllowAnyHeader();
+                          builder
+                              .WithOrigins("https://todoclient-mlxb.onrender.com")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
                       });
 });
 
@@ -35,9 +45,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(AllowReactOrigins);
 
-
 //getTasks
-
 app.MapGet("/items", async(ToDoDbContext context) => {
     var items = await context.Items.ToListAsync();
     return Results.Ok(items);
@@ -79,7 +87,6 @@ app.MapDelete("/items/{id:int}", async(int id,ToDoDbContext context) => {
 
 // if (app.Environment.IsDevelopment())
 // {
-    //app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
@@ -87,8 +94,4 @@ app.MapDelete("/items/{id:int}", async(int id,ToDoDbContext context) => {
 app.MapGet("/",()=>"server Api is running");
 
 app.Run();
-//app.Run();
-
-
-
-//https://localhost:5170
+//app.Run("https://localhost:5170");
