@@ -10,19 +10,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-IConfiguration configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json")
-    .Build();
+//IConfiguration configuration = new ConfigurationBuilder()
+//    .SetBasePath(Directory.GetCurrentDirectory())
+//    .AddJsonFile("appsettings.json")
+//    .Build();
 
-string connectionString = configuration.GetConnectionString("ToDoDB");
+//string connectionString = configuration.GetConnectionString("ToDoDB");
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 //dependency injection
-builder.Services.AddDbContext<ToDoDbContext>(options => options.UseMySql(connectionString));
+builder.Services.AddDbContext<ToDoDbContext>();
+//builder.Services.AddDbContext<ToDoDbContext>(options => options.UseMySql(connectionString));
+
 
 builder.Services.AddSwaggerGen();
 
