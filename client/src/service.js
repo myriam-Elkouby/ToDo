@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Config default base URL API requests
-const apiUrl = "https://localhost:5170";
+const apiUrl = process.env.REACT_APP_API_ADDRESS;
 axios.defaults.baseURL = apiUrl;
 // axios.defaults.headers.common = {
 //   'Content-Type': 'application/json',
